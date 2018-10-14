@@ -28,7 +28,7 @@ void setup() {
 // Instantiating the power notes for each finger
 // Parameters are (name, analog input pin, led pin, threshold, note, velocity, channel)
 // We are using the first five notes of the A minor scale
-PowerNote pinky("Pinky", A9, 9, 615, 50, 100, 1);
+PowerNote pinky("Pinky", A9, 9, 600, 50, 100, 1);
 PowerNote ring("Ring", A8, 8, 625, 52, 100, 1);
 PowerNote middle("Middle", A7, 5, 760, 53, 100, 1);
 PowerNote pointer("Pointer", A6, 10, 585, 55, 100, 1);
@@ -62,8 +62,8 @@ void loop() {
   if (ms >= 20) {
     ms = 0;
     // Further smoothing and response adjustment done with exponentially weighted moving average
-    zAccelAVG = zAlpha * rangeMap(0, 30, 0, 127, a.acceleration.z) + (1-zAlpha) * zAccelAVG;
-    xAccelAVG = xAlpha * rangeMap(0, 20, 0, 127, a.acceleration.x) + (1-xAlpha) * xAccelAVG;
+    zAccelAVG = zAlpha * rangeMap(0, 20, 0, 127, a.acceleration.z) + (1-zAlpha) * zAccelAVG;
+    xAccelAVG = xAlpha * rangeMap(0, 15, 0, 127, a.acceleration.x) + (1-xAlpha) * xAccelAVG;
     usbMIDI.sendControlChange(11, zAccelAVG, 1);  // 11 = expression control
     usbMIDI.sendControlChange(1, xAccelAVG, 1); // 1 = modulation control
   }
