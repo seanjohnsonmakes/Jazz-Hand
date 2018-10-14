@@ -62,7 +62,7 @@ void loop() {
   if (ms >= 20) {
     ms = 0;
     // Further smoothing and response adjustment done with exponentially weighted moving average
-    zAccelAVG = zAlpha * rangeMap(0, 20, 0, 127, a.acceleration.z) + (1-zAlpha) * zAccelAVG;
+    zAccelAVG = zAlpha * rangeMap(0, 15, 0, 127, a.acceleration.z) + (1-zAlpha) * zAccelAVG;
     xAccelAVG = xAlpha * rangeMap(0, 15, 0, 127, a.acceleration.x) + (1-xAlpha) * xAccelAVG;
     usbMIDI.sendControlChange(11, zAccelAVG, 1);  // 11 = expression control
     usbMIDI.sendControlChange(1, xAccelAVG, 1); // 1 = modulation control
